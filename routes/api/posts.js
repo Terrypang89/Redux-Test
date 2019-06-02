@@ -48,7 +48,7 @@ router.get('/:id', (req,res)=> {
 router.post('/', passport.authenticate('jwt', {session: false}), (req, res)=>{
     const {errors, isValid} = validatePostInput(req.body);
 
-    // chekc validation
+    // check validation
     if(!isValid){
         //if any errors, send 400 with errors object
         return res.status(400).json(errors);

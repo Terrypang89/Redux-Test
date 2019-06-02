@@ -1,5 +1,5 @@
 const express = require('express');
-const router = express.Router();
+const router = express.Router(); // express.router
 const mongoose = require('mongoose');
 const passport = require('passport');
 
@@ -27,21 +27,18 @@ router.get('/', passport.authenticate(
     'jwt', 
     {session: false}), 
     (req, res) => { //callback funct
-    
         const errors = {};
-
-    Profile.findOne({user: req.user.id})
-        .then(profile => { //callback funct
+        //findOne is from mongodb.js 
+    Profile.findOne({user: req.user.id}) // find Profile.user.id from mongoose db 
+        .then(profile => { //if found then callback funct
             if(!profile){ // if no profile exists
                 errors.noprofile= 'There is no profile for this user';
                 return res.status(404).json(errors);
             }
             res.json(profile); //success response profile
         })
-        .catch(err => res.status(404).json(err));
+        .catch(err => res.status(404).json(err)); // throw error 
 });
-
-
 
 // @route   GET api/profile/all
 // @descp   GET all profiles
@@ -49,32 +46,31 @@ router.get('/', passport.authenticate(
 
 router.get('/all', (req, res)=> {
     const errors = {};
-
-    Profile.find()
-        .populate('user', ['name', 'avatar'])
-        .then(profiles => {
+// populate is the process of auto replacing specified path in the documents with documents from other collection
+    Profile.find().populate('user', ['name', 'avatar'])
+        .then(profiles => { 
             if(!profiles){
                 errors.noprofile = 'There are no profile';
                 res.status(404).json(errors);
-            }
-            res.json(profiles);
-        })
+            } 
+            res.json(profiles); // send response to profiles
+        }) 
         .catch(err => res.status(404).json({profiles: 'There is no profile'})); 
 });
 
 // @route   GET api/profile/handle/:handle
 // @descp   GET profile by handle
 // @access  Public
-
+// 
 router.get('/handle/:handle', (req, res)=> {
-    Profile.findOne({handle: req.params.handle})
-        .populate('user', ['name', 'avatar'])
+    Profile.findOne({handle: req.params.handle}) // return 
+        .populate('user', ['name', 'avatar']) //populate on user name and user avatar
         .then(profile => {
             if(!profile){
                 errors.noprofile = 'There is no profile for this user';
                 res.status(404).json(errors);
             }
-            res.json(profile);
+            res.json(profile); // response the profile
         })
         .catch(err => res.status(404).json(err)); 
 });

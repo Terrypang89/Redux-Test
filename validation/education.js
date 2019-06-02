@@ -3,13 +3,13 @@ const isEmpty = require('./is-empty');
 
 module.exports = function validateEducationInput(data){
     let errors = {};
-    
+     //check if the data are emptied, if yes then make it empty
     data.school = !isEmpty(data.school) ? data.school : '';
     data.degree = !isEmpty(data.degree) ? data.degree : '';
     data.fieldofstudy = !isEmpty(data.fieldofstudy) ? data.fieldofstudy : '';
     data.from = !isEmpty(data.from) ? data.from : '';
 
-
+    // use validator to tell the rest to be emptied
     if(Validator.isEmpty(data.school)){
         errors.school = 'school field is required'; 
     }

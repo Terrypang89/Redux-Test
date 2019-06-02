@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+// mongoose schema is needed to tell how the trsucture is being arracnge when is being created
 
 //create schema
 const PostSchema = new Schema({

@@ -1,8 +1,8 @@
 var JwtStrategy = require('passport-jwt').Strategy;
 //type of passport strategies can select from here: http://www.passportjs.org/packages/ 
-const ExtractJwt = require('passport-jwt').ExtractJwt;
+const ExtractJwt = require('passport-jwt').ExtractJwt; //get a passport jwt 
 const mongoose = require('mongoose');
-const User = mongoose.model('users');
+const User = mongoose.model('users'); // connect with user
 const keys = require('../config/keys');
 
 //configure for passport strategies using passport-jwt
