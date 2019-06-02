@@ -38,7 +38,6 @@ class Register extends Component {
 }
 
   render() {
-    const errors = this.state.errors;
     return (
         <div className="register">
             <div className="container">
@@ -54,15 +53,12 @@ class Register extends Component {
                             <div className="form-group">
                                 <input 
                                     type="text" 
-                                    className={classnames('form-control form-control-lg', {
-                                        'is-invalid': errors.name
-                                    })}
+                                    className="form-control form-control-lg"
                                     placeholder="Name" 
                                     name="name" 
                                     value = {this.state.name} 
                                     onChange = {this.onChange} 
                                 />
-                                { errors.name && (<div className="invalid-feedback">{errors.name}</div>)}
                             </div>
                             <div className="form-group">
                                 <input 
